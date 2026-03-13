@@ -41,7 +41,7 @@ const NAV_HTML = `
   <a href="experience.html" data-page="experience.html">Experience</a>
   <a href="skills.html" data-page="skills.html">Skills</a>
   <a href="case-studies.html" data-page="case-studies.html">Work</a>
-  <a href="blog.html" data-page="blog.html">Writing</a>
+  <a href="blog.html" data-page="blog.html">Blog</a>
   <a href="contact.html" data-page="contact.html">Contact</a>
   <div class="mobile-menu-socials">
     <a href="https://linkedin.com/in/pallavkumarsharma" target="_blank">
@@ -61,7 +61,7 @@ const NAV_HTML = `
 
 const FOOTER_HTML = `
 <footer>
-  <span class="footer-copy">© 2025 Pallav Kumar Sharma. All rights reserved.</span>
+  <span class="footer-copy">© 2024-present Pallav Kumar Sharma. All rights reserved.</span>
   <div class="footer-links">
     <a href="mailto:pallav945@gmail.com">pallav945@gmail.com</a>
     <a href="https://pallavkumar.in" target="_blank">pallavkumar.in</a>
