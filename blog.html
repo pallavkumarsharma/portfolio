@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Writing — Pallav Kumar Sharma</title>
+<title>Blog — Pallav Kumar Sharma</title>
 <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -145,7 +145,7 @@
 <div class="page-content">
 
   <div class="blog-hero">
-    <div class="section-label">Writing</div>
+    <div class="section-label">Blog</div>
     <h1 class="section-title">Thoughts on integration,<br>architecture & craft.</h1>
     <div class="divider"></div>
     <p class="section-subtitle">Perspectives on API strategy, enterprise integration patterns, and building engineering teams that scale.</p>
@@ -155,23 +155,23 @@
     <div class="blog-grid">
 
       <div class="blog-card reveal" onclick="openModal('post1')">
+        <div class="blog-date">July 2025 · 5 min read</div>
+        <div class="blog-title">From Developer to Architect: The Mindset Shift Nobody Tells You About</div>
+        <div class="blog-excerpt">Moving into architecture isn't about knowing more technology. It's about learning to hold ambiguity, make defensible trade-offs, and communicate decisions to people who care about very different things.</div>
+        <span class="blog-read-more">Read Article →</span>
+      </div>
+
+      <div class="blog-card reveal" onclick="openModal('post2')">
         <div class="blog-date">March 2025 · 7 min read</div>
         <div class="blog-title">Why API-Led Connectivity Is Still the Gold Standard for Enterprise Integration</div>
         <div class="blog-excerpt">Five years after MuleSoft popularised the three-tier model, I still see API-led connectivity outperform every alternative I've encountered in the wild. Here's why — and what teams get wrong about it.</div>
         <span class="blog-read-more">Read Article →</span>
       </div>
 
-      <div class="blog-card reveal" onclick="openModal('post2')">
+      <div class="blog-card reveal" onclick="openModal('post3')">
         <div class="blog-date">October 2024 · 6 min read</div>
         <div class="blog-title">HIPAA-Compliant Integration: What "Secure by Design" Actually Means</div>
         <div class="blog-excerpt">Healthcare integrations carry a weight that fintech and retail simply don't. A single misconfigured API policy can expose PHI to the wrong system. Here's how I think about security architecture in health data environments.</div>
-        <span class="blog-read-more">Read Article →</span>
-      </div>
-
-      <div class="blog-card reveal" onclick="openModal('post3')">
-        <div class="blog-date">July 2025 · 5 min read</div>
-        <div class="blog-title">From Developer to Architect: The Mindset Shift Nobody Tells You About</div>
-        <div class="blog-excerpt">Moving into architecture isn't about knowing more technology. It's about learning to hold ambiguity, make defensible trade-offs, and communicate decisions to people who care about very different things.</div>
         <span class="blog-read-more">Read Article →</span>
       </div>
 
@@ -193,6 +193,21 @@
 <script>
 window.blogPosts = {
   post1: {
+    label: 'Career & Leadership',
+    date: 'July 2025 · 5 min read',
+    title: 'From Developer to Architect: The Mindset Shift Nobody Tells You About',
+    body: `
+      <p>When I moved from integration developer to integration architect, I expected the challenge to be technical — more complex systems, higher-stakes design decisions, deeper expertise. What I didn't expect was how much the hardest parts would have nothing to do with technology at all.</p>
+      <h3>The thing that actually changes</h3>
+      <p>As a developer, correctness is the primary virtue. Code either works or it doesn't. Architecture operates in a world of trade-offs, where every decision is correct in some dimension and wrong in another. You're not choosing the right answer — you're choosing which problems you're willing to have.</p>
+      <h3>Communicating across different worldviews</h3>
+      <p>Developers care about correctness, elegance, and maintainability. Product owners care about delivery timelines and feature capability. CIOs care about cost, risk, and strategic alignment. Architects need to translate the same decision into each of these languages — sometimes in the same meeting.</p>
+      <h3>Learning to hold ambiguity</h3>
+      <p>Projects start ambiguous and become clear only as they progress — but architecture decisions often need to be made early, precisely when you know the least. The skill I've worked hardest to develop is what I'd call "confident tentativeness": making a clear, committed decision in the present while building in the flexibility to revisit it as information improves.</p>
+      <p>If you're a developer considering the move to architecture, my advice is this: start noticing the decisions that feel uncomfortable because there's no clear right answer. That discomfort is the skill you need to build. The technology is the easy part.</p>
+    `
+  },
+  post2: {
     label: 'Integration Strategy',
     date: 'March 2025 · 7 min read',
     title: 'Why API-Led Connectivity Is Still the Gold Standard for Enterprise Integration',
@@ -209,7 +224,7 @@ window.blogPosts = {
       <p>API-led connectivity isn't perfect for every context — smaller organisations with limited system landscapes may find it overkill. But for enterprises operating across multiple clouds, legacy systems, and Salesforce ecosystems simultaneously, the model remains remarkably durable. The key is treating it as an architecture philosophy, not just a MuleSoft feature set.</p>
     `
   },
-  post2: {
+  post3: {
     label: 'Healthcare Integration',
     date: 'October 2024 · 6 min read',
     title: 'HIPAA-Compliant Integration: What "Secure by Design" Actually Means',
@@ -223,21 +238,6 @@ window.blogPosts = {
       <p>HIPAA requires comprehensive audit trails — who accessed what PHI, when, and from which system. I treat audit logging as a first-class integration concern, not an operational add-on. Every API call involving PHI writes structured audit events to a tamper-evident log store.</p>
       <h3>HL7 and the complexity it brings</h3>
       <p>HL7 v2 was designed in an era when security was rarely a concern. Messages are verbose, encoding is inconsistent, and validation is often weak. When I build HL7 ingestion pipelines, I treat every incoming message as untrusted input, normalize and validate at ingestion, and only then allow it to interact with downstream Salesforce Health Cloud workflows.</p>
-    `
-  },
-  post3: {
-    label: 'Career & Leadership',
-    date: 'July 2025 · 5 min read',
-    title: 'From Developer to Architect: The Mindset Shift Nobody Tells You About',
-    body: `
-      <p>When I moved from integration developer to integration architect, I expected the challenge to be technical — more complex systems, higher-stakes design decisions, deeper expertise. What I didn't expect was how much the hardest parts would have nothing to do with technology at all.</p>
-      <h3>The thing that actually changes</h3>
-      <p>As a developer, correctness is the primary virtue. Code either works or it doesn't. Architecture operates in a world of trade-offs, where every decision is correct in some dimension and wrong in another. You're not choosing the right answer — you're choosing which problems you're willing to have.</p>
-      <h3>Communicating across different worldviews</h3>
-      <p>Developers care about correctness, elegance, and maintainability. Product owners care about delivery timelines and feature capability. CIOs care about cost, risk, and strategic alignment. Architects need to translate the same decision into each of these languages — sometimes in the same meeting.</p>
-      <h3>Learning to hold ambiguity</h3>
-      <p>Projects start ambiguous and become clear only as they progress — but architecture decisions often need to be made early, precisely when you know the least. The skill I've worked hardest to develop is what I'd call "confident tentativeness": making a clear, committed decision in the present while building in the flexibility to revisit it as information improves.</p>
-      <p>If you're a developer considering the move to architecture, my advice is this: start noticing the decisions that feel uncomfortable because there's no clear right answer. That discomfort is the skill you need to build. The technology is the easy part.</p>
     `
   }
 };

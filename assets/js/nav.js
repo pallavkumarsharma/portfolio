@@ -8,7 +8,7 @@ const NAV_HTML = `
     <li><a href="experience.html" data-page="experience.html">Experience</a></li>
     <li><a href="skills.html" data-page="skills.html">Skills</a></li>
     <li><a href="case-studies.html" data-page="case-studies.html">Work</a></li>
-    <li><a href="blog.html" data-page="blog.html">Writing</a></li>
+    <li><a href="blog.html" data-page="blog.html">Blog</a></li>
     <li><a href="contact.html" data-page="contact.html">Contact</a></li>
   </ul>
   <div class="nav-right">
