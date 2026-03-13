@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Pallav Kumar Sharma</title>
+  <meta name="description"
+    content="Case studies spanning healthcare, government, media, and enterprise consulting — integration at scale." />
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    .cases-hero {
+      background: var(--navy);
+      padding: 120px 8vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cases-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 75% 60%, rgba(196, 154, 60, 0.06) 0%, transparent 55%);
+    }
+
+    .cases-hero .section-title {
+      color: var(--white);
+    }
+
+    .cases-hero .section-subtitle {
+      color: rgba(248, 249, 252, 0.5);
+    }
+
+    .cases-body {
+      padding: 80px 8vw;
+    }
+
+    /* Featured */
+    .case-featured {
+      background: var(--navy);
+      border-radius: 2px;
+      padding: 3.5rem;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      transition: box-shadow 0.3s;
+    }
+
+    .case-featured::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gold);
+    }
+
+    .case-featured:hover {
+      box-shadow: 0 16px 48px rgba(7, 14, 30, 0.3);
+    }
+
+    .case-featured-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .case-featured-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+    }
+
+    .case-featured-body {
+      font-size: 0.97rem;
+      color: rgba(248, 249, 252, 0.62);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .case-feat-cta {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(196, 154, 60, 0.4);
+      transition: border-color 0.2s;
+    }
+
+    .case-featured:hover .case-feat-cta {
+      border-color: var(--gold);
+    }
+
+    .case-feat-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .case-feat-tag {
+      font-size: 0.72rem;
+      color: rgba(248, 249, 252, 0.45);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .case-featured-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+    }
+
+    .case-feat-stat {
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .case-feat-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .case-feat-stat-label {
+      font-size: 0.7rem;
+      color: rgba(248, 249, 252, 0.38);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Grid cards */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .case-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2.5rem;
+      transition: box-shadow 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+    }
+
+    .case-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .case-card:hover {
+      box-shadow: 0 12px 40px rgba(12, 26, 53, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .case-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .case-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .case-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+
+    .case-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .case-meta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .case-badge {
+      font-size: 0.7rem;
+      color: var(--navy-mid);
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    @media (max-width: 900px) {
+      .case-featured {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 2.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="page-content">
+
+    <div class="cases-hero">
+      <div class="section-label">Work</div>
+      <h1 class="section-title">Work that made<br>an impact.</h1>
+      <div class="divider"></div>
+      <p class="section-subtitle">Selected projects spanning healthcare, government, media, and consulting — each one a
+        study in integration at enterprise scale.</p>
+    </div>
+
+    <div class="cases-body">
+
+      <a href="integration-coe.html" class="case-featured reveal">
+        <div>
+          <div class="case-featured-label">Consulting · Team Leadership · MinloPro Partners</div>
+          <div class="case-featured-title">Building an Integration Centre of Excellence</div>
+          <div class="case-featured-body">Established an Integration CoE from the ground up — defining architecture
+            standards, reusable asset libraries, CI/CD pipelines, and security patterns that became the operational
+            backbone for every client engagement.</div>
+          <div class="case-feat-tags">
+            <span class="case-feat-tag">Integration CoE</span>
+            <span class="case-feat-tag">Governance</span>
+            <span class="case-feat-tag">CI/CD</span>
+            <span class="case-feat-tag">Team Mentoring</span>
+            <span class="case-feat-tag">MuleSoft Anypoint</span>
+          </div>
+          <span class="case-feat-cta">Read Case Study →</span>
+        </div>
+        <div>
+          <div class="case-featured-stats">
+            <div class="case-feat-stat">
+              <div class="case-feat-stat-num">50+</div>
+              <div class="case-feat-stat-label">Projects Under CoE</div>
+            </div>
+            <div class="case-feat-stat">
+              <div class="case-feat-stat-num">6</div>
+              <div class="case-feat-stat-label">Engineers Mentored</div>
+            </div>
+            <div class="case-feat-stat">
+              <div class="case-feat-stat-num">3</div>
+              <div class="case-feat-stat-label">Industry Domains</div>
+            </div>
+            <div class="case-feat-stat">
+              <div class="case-feat-stat-num">↓</div>
+              <div class="case-feat-stat-label">Delivery Time</div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <div class="cases-grid">
+
+        <a href="arkos-health.html" class="case-card reveal">
+          <div class="case-tag">Healthcare · MTX Group</div>
+          <div class="case-title">Real-Time Clinical Integration for Arkos Health</div>
+          <p class="case-body">Architected an end-to-end HL7 event ingestion and real-time integration platform on
+            MuleSoft CloudHub, connecting Salesforce Health Cloud with enterprise EHR systems.</p>
+          <div class="case-meta">
+            <span class="case-badge">HL7 / FHIR</span>
+            <span class="case-badge">Health Cloud</span>
+            <span class="case-badge">HIPAA</span>
+          </div>
+        </a>
+
+        <a href="informa-modernisation.html" class="case-card reveal">
+          <div class="case-tag">Media · Cost Optimisation · Invenio</div>
+          <div class="case-title">Integration Modernisation for Informa Global</div>
+          <p class="case-body">Redesigned legacy middleware patterns for global media company Informa, achieving ~15%
+            operational cost reduction and delivering reusable integration assets across the platform.</p>
+          <div class="case-meta">
+            <span class="case-badge">API-Led</span>
+            <span class="case-badge">~15% Cost Reduction</span>
+            <span class="case-badge">Governance</span>
+          </div>
+        </a>
+
+        <a href="uae-federal-tax.html" class="case-card reveal">
+          <div class="case-tag">Government · Finance · Invenio</div>
+          <div class="case-title">UAE Federal Tax Authority — eCTS Banking Integration</div>
+          <p class="case-body">Led the MuleSoft integration workstream for the UAE FTA's eCTS platform, connecting
+            national banking systems through a RAML-based common data model on Private Cloud Edition.</p>
+          <div class="case-meta">
+            <span class="case-badge">RAML APIs</span>
+            <span class="case-badge">Private Cloud</span>
+            <span class="case-badge">Government</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

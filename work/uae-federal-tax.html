@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UAE Federal Tax Authority eCTS Integration — Pallav Kumar Sharma</title>
+  <meta name="description"
+    content="MuleSoft integration for the UAE Federal Tax Authority eCTS platform — connecting national banking systems through a RAML-based common data model on Private Cloud Edition." />
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="page-content">
+
+    <div class="article-hero">
+      <a href="index.html" class="article-back">
+        <svg viewBox="0 0 16 16" width="14" height="14">
+          <path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10 3L5 8l5 5" fill="none" />
+        </svg>
+        All Work
+      </a>
+      <div class="article-meta">
+        <span class="article-cat">Government · Financial Integration</span>
+        <span class="article-dot">·</span>
+        <span class="article-date">Invenio · Jul 2021 – Nov 2023</span>
+      </div>
+      <h1>UAE Federal Tax Authority — eCTS Banking Integration</h1>
+      <p class="article-summary">Leading the MuleSoft integration workstream for the UAE Federal Tax Authority's
+        electronic tax collection system — connecting national banking institutions and government platforms through a
+        unified, auditable common data model on Private Cloud Edition.</p>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-content">
+
+        <h2 id="context">Context</h2>
+        <p>The UAE Federal Tax Authority required a secure, auditable integration layer between its eCTS (electronic tax
+          collection system) and multiple national banking institutions. This wasn't a typical enterprise integration —
+          it involved government-regulated data flows, strict auditability requirements, and the complexity of
+          connecting financial institutions that each had their own data models and security standards.</p>
+        <p>The deployment environment was MuleSoft Private Cloud Edition, mandated by the sensitivity of the workload.
+          No cloud-hosted components for data processing — everything on-premise within the government's own
+          infrastructure perimeter.</p>
+
+        <h2 id="design">Design approach</h2>
+        <p>The key architectural decision was a common data model built in RAML — a single canonical representation of a
+          tax transaction that all participating banking institutions mapped to and from. Without this, each bank
+          integration would have required bespoke transformation logic, with no reuse and significant maintenance risk.
+        </p>
+        <p>The RAML-based API contract served two purposes: it defined the technical interface that each bank's
+          integration had to satisfy, and it served as the governance document that all stakeholders — technical and
+          non-technical — could reason about.</p>
+        <p>System APIs handled the bank-specific transformations. A process API handled the business logic: tax
+          calculation validation, transaction routing, error handling for partial failures. The experience API exposed
+          the interface that the FTA's internal systems consumed.</p>
+
+        <h2 id="security">Security and auditability</h2>
+        <p>Government tax systems have non-negotiable audit requirements. Every transaction flowing through the
+          integration generated an immutable audit record: timestamp, transaction ID, source bank, amount, tax category,
+          processing outcome, and any transformation applied. These records were designed to support both operational
+          monitoring and regulatory audit queries years after the fact.</p>
+
+        <blockquote>
+          <p>Designing for auditability from day one — rather than retrofitting it — is what makes government
+            integration work trustworthy at the scale of national financial infrastructure.</p>
+        </blockquote>
+
+        <h2 id="outcome">Outcome</h2>
+        <p>The integration enabled secure, auditable tax transaction flows across multiple financial institutions
+          through a unified platform. The common data model proved its value during bank onboarding — each new
+          institution required only a system-layer integration to the canonical model, not a full-stack build.</p>
+
+        <div class="article-tags">
+          <span class="article-tag">RAML APIs</span>
+          <span class="article-tag">MuleSoft PCE</span>
+          <span class="article-tag">Banking Integration</span>
+          <span class="article-tag">Government</span>
+          <span class="article-tag">Common Data Model</span>
+          <span class="article-tag">API-Led Connectivity</span>
+        </div>
+
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">In this case study</div>
+          <ul class="sidebar-toc">
+            <li><a href="#context">Context</a></li>
+            <li><a href="#design">Design approach</a></li>
+            <li><a href="#security">Security & auditability</a></li>
+            <li><a href="#outcome">Outcome</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">Engagement</div>
+          <div style="font-size:0.85rem; color:var(--muted); line-height:1.7; font-weight:300;">
+            <div style="color:var(--navy); font-weight:500; margin-bottom:0.3rem;">Invenio</div>
+            Associate Consultant<br />Jul 2021 – Nov 2023
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">Government or regulated industry?</div>
+          <a href="../contact.html" class="btn-outline-dark"
+            style="font-size:0.75rem; padding: 0.55rem 1.2rem; display:inline-block;">Get in Touch</a>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

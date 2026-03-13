@@ -1,4 +1,4 @@
-# Pallav Kumar Sharma — Personal Portfolio
+# Pallav Kumar Sharma — Portfolio
 
 > MuleSoft Architect & Integration Manager  
 > [pallavkumar.in](https://pallavkumar.in) · [LinkedIn](https://linkedin.com/in/pallavkumarsharma) · [GitHub](https://github.com/pallavkumarsharma)
@@ -9,125 +9,138 @@
 
 ```
 portfolio/
-├── index.html              # Home / Hero page
-├── about.html              # About & Bio
-├── experience.html         # Career Timeline
-├── skills.html             # Technical Skills + Proficiency bars
-├── case-studies.html       # Project Case Studies
-├── blog.html               # Writing / Articles (modal reader)
-├── contact.html            # Contact Form (Formspree)
-├── README.md               # This file
+│
+├── index.html                  # Home / Hero
+├── about.html                  # About & Bio
+├── experience.html             # Career Timeline
+├── skills.html                 # Skills + Proficiency bars
+├── contact.html                # Contact Form (Formspree)
+│
+├── blog/                       # ← All writing lives here
+│   ├── index.html              #   Listing page (replaces old popup grid)
+│   ├── why-api-led-connectivity-gold-standard.html
+│   ├── hipaa-compliant-integration-secure-by-design.html
+│   └── developer-to-architect-mindset-shift.html
+│
+├── work/                       # ← All case studies live here
+│   ├── index.html              #   Listing page
+│   ├── integration-coe.html
+│   ├── arkos-health.html
+│   ├── informa-modernisation.html
+│   └── uae-federal-tax.html
 │
 └── assets/
     ├── css/
-    │   └── styles.css      # Shared stylesheet (all pages)
+    │   └── styles.css          # Single shared stylesheet
     ├── js/
-    │   ├── nav.js          # Shared nav + footer injection
-    │   └── main.js         # Scroll reveal, form handling, modals
+    │   └── nav.js              # Nav, footer, hamburger, reveal, form — all in one
     └── images/
-        ├── pallav-mono.png # Primary portrait (B&W, used on Hero)
-        └── pallav-casual.jpg # Secondary portrait (used on About)
+        ├── favicon.png         # Tab icon
+        ├── pallav-mono.png     # Primary photo (B&W — hero, about)
+        ├── pallav-casual.jpg   # Secondary photo (blog post sidebar)
+        ├── blog/               # ← Drop post-specific images here
+        └── work/               # ← Drop case study images here
 ```
 
 ---
 
 ## Tech Stack
 
-- **Pure HTML / CSS / JS** — no frameworks, no build step
+- **Pure HTML / CSS / Vanilla JS** — no framework, no build step, deploys anywhere
 - **Google Fonts** — Playfair Display + DM Sans + DM Mono
-- **Formspree** — contact form email delivery (see setup below)
-- **Deployable anywhere** — GitHub Pages, Netlify, Vercel, or any static host
+- **Formspree** — contact form email delivery
+- **Giscus** — comments on blog posts (powered by GitHub Discussions, free, no ads)
+- **GitHub Pages** — hosting at pallavkumar.in
 
 ---
 
-## Setup & Deployment
+## Setup Guide
 
-### 1. Clone the repo
+### 1. Clone & switch to your branch
 ```bash
 git clone https://github.com/pallavkumarsharma/portfolio.git
 cd portfolio
+git checkout feature-test-release
 ```
 
-### 2. Enable Contact Form (Formspree)
-To receive emails from the contact form:
-1. Go to [formspree.io](https://formspree.io) and sign up (free tier is fine)
-2. Create a new form — it will give you a Form ID like `xpzgknjv`
-3. Open `contact.html` and replace `YOUR_FORM_ID` in the form action:
-   ```html
-   <!-- Before -->
-   <form action="https://formspree.io/f/YOUR_FORM_ID">
-   
-   <!-- After -->
-   <form action="https://formspree.io/f/xpzgknjv">
-   ```
-4. On first submission, Formspree will send a confirmation email to verify your address
+---
 
-### 3. Deploy to GitHub Pages
+### 2. Enable Giscus comments (one-time, ~5 minutes)
+
+Giscus stores comments in your repo's GitHub Discussions — free, no ads, no tracking. Readers need a GitHub account to comment.
+
+**Step-by-step:**
+1. Go to your repo → **Settings → Features** → enable **Discussions**
+2. Create a new Discussion category called `Blog Comments` (type: Announcements)
+3. Go to **[giscus.app](https://giscus.app)**
+4. Enter your repo: `pallavkumarsharma/portfolio`
+5. Set mapping: **Pathname**
+6. Select category: **Blog Comments**
+7. Copy the generated `<script>` tag
+
+**Then replace the placeholder in each blog post** (`blog/*.html`).  
+Find this block and replace with your generated script:
+
+```html
+<!-- REPLACE THIS with your generated giscus <script> tag -->
+<script src="https://giscus.app/client.js"
+  data-repo="pallavkumarsharma/portfolio"
+  data-repo-id="YOUR_REPO_ID"          ← replace this
+  data-category="Blog Comments"
+  data-category-id="YOUR_CATEGORY_ID"  ← replace this
+  ...
+```
+
+The values `YOUR_REPO_ID` and `YOUR_CATEGORY_ID` are the only two things to update — giscus.app shows the exact values for your repo.
+
+---
+
+### 3. Enable Contact Form (Formspree)
+
+1. Go to [formspree.io](https://formspree.io) → sign up (free)
+2. Create a new form → copy your Form ID (e.g. `xpzgknjv`)
+
+3. In `contact.html`, replace `YOUR_FORM_ID`:
+   ```html
+   <form action="https://formspree.io/f/xpzgknjv" ...>
+   ```
+4. First submission triggers a verification email to your address
+
+---
+
+### 4. Deploy to GitHub Pages
+
 ```bash
 git add .
-git commit -m "Initial portfolio deployment"
-git push origin main
+git commit -m "Restructure: separate blog/ and work/ folders"
+git push origin feature-test-release
 ```
-Then in your GitHub repo → **Settings → Pages → Source: main branch / root** → Save.  
-Your site will be live at `https://pallavkumarsharma.github.io/portfolio`
 
-### 4. Custom Domain (pallavkumar.in)
-1. Add a `CNAME` file to the repo root with your domain:
-   ```
-   pallavkumar.in
-   ```
-2. In your domain registrar (GoDaddy / Namecheap / etc.), add DNS records:
-   ```
-   A     @    185.199.108.153
-   A     @    185.199.109.153
-   A     @    185.199.110.153
-   A     @    185.199.111.153
-   CNAME www  pallavkumarsharma.github.io
-   ```
-3. In GitHub Pages settings, set custom domain to `pallavkumar.in` and enable HTTPS
+GitHub repo → **Settings → Pages → Source: feature-test-release / root** → Save.
 
 ---
 
-## Customisation Guide
-
-### Update personal content
-- **Resume bullets / experience**: Edit `experience.html`
-- **Case studies**: Edit `case-studies.html` — add/remove `.case-card` blocks
-- **Blog posts**: Edit `blog.html` — add entries to `window.blogPosts` object
-- **Skills**: Edit `skills.html` — add `.skill-tag` spans to any card
-- **Colors**: All CSS variables are in `assets/css/styles.css` under `:root {}`
-
-### Add your headshot
-Replace files in `assets/images/`:
-- `pallav-mono.png` — primary photo (hero page, dark/B&W preferred)
-- `pallav-casual.jpg` — secondary photo (about page)
-
-### Add certifications
-In `about.html`, add a new `.chip` inside `.about-chips`:
-```html
-<span class="chip">MuleSoft Certified Integration Architect</span>
-```
+## Adding Content
 
 ### Add a new blog post
-In `blog.html`, add to `window.blogPosts`:
-```javascript
-post4: {
-  label: 'Category',
-  date: 'April 2024 · 5 min read',
-  title: 'Your Post Title',
-  body: `<p>Your content here...</p>`
-}
-```
-And add a new `.blog-card` div with `onclick="openModal('post4')"`.
 
----
+1. **Duplicate** any existing post in `blog/` and rename with a descriptive slug:
+   ```
+   blog/your-post-title-here.html
+   ```
+2. **Update** the `<title>`, `<meta name="description">`, hero section, and article body
+3. **Add a card** in `blog/index.html` pointing to the new file
+4. Giscus comments work automatically — the `data-mapping="pathname"` means each post gets its own discussion thread
 
-## Social Links (already wired in nav + footer)
-- LinkedIn: `https://linkedin.com/in/pallavkumarsharma`
-- GitHub: `https://github.com/pallavkumarsharma`
-- WhatsApp: `https://wa.me/917050757171`
+### Add a new case study
 
-To update, search for these URLs in `assets/js/nav.js` and replace.
+1. **Duplicate** any existing page in `work/` and rename it
+2. **Update** all content including stats, tags, and sidebar
+3. **Add a card** in `work/index.html` pointing to the new file
+
+### Update social links / contact details
+
+Everything is in `assets/js/nav.js` — search for the URLs and update them there. Changes propagate to every page automatically.
 
 ---
 

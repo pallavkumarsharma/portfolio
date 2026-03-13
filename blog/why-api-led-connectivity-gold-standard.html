@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why API-Led Connectivity Is Still the Gold Standard — Pallav Kumar Sharma</title>
+  <meta name="description"
+    content="Five years after MuleSoft popularised the three-tier model, API-led connectivity still outperforms every alternative at enterprise scale." />
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="page-content">
+
+    <div class="article-hero">
+      <a href="index.html" class="article-back">
+        <svg viewBox="0 0 16 16" width="14" height="14">
+          <path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10 3L5 8l5 5" fill="none" />
+        </svg>
+        All Articles
+      </a>
+      <div class="article-meta">
+        <span class="article-cat">API Strategy</span>
+        <span class="article-dot">·</span>
+        <span class="article-date">March 2025 · 7 min read</span>
+      </div>
+      <h1>Why API-Led Connectivity Is Still the Gold Standard for Enterprise Integration</h1>
+      <p class="article-summary">Five years after MuleSoft popularised the three-tier model, I still see API-led
+        connectivity outperform every alternative I've encountered in the wild. Here's why — and what teams get wrong
+        about it.</p>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-content">
+
+        <p>Every few years, a new integration paradigm arrives claiming to replace everything before it. Event-driven
+          architectures, mesh-based approaches, composable enterprise platforms — all promising simplicity, all
+          ultimately revealing their own complexity in production. Yet the three-tier API-led connectivity model,
+          popularised by MuleSoft nearly a decade ago, continues to outperform alternatives I encounter in the wild.</p>
+
+        <h2 id="problem">The problem with "simpler" alternatives</h2>
+        <p>Point-to-point integrations are seductive at small scale. Two systems need to talk — you build one
+          connection, it works, you ship. The trouble is that at enterprise scale, point-to-point creates a mesh so
+          dense it becomes unmaintainable. I've inherited systems where changing one endpoint required tracing
+          dependencies through 40 integrations. API-led connectivity forces a discipline that pays dividends precisely
+          when the system is under its highest stress: during change.</p>
+
+        <h2 id="three-tier">The three-tier model in practice</h2>
+        <p>Experience Layer, Process Layer, System Layer — this separation of concerns maps almost perfectly to how
+          organisations actually change. System APIs are stable and rarely modified. Process APIs evolve with business
+          logic. Experience APIs change constantly as products evolve.</p>
+        <p>When teams conflate these layers, they pay in brittleness. When they respect the separation, they gain the
+          ability to swap out underlying systems without touching consumer-facing integrations. I've seen this save
+          months on a Salesforce migration where every system API remained untouched while the process and experience
+          layers absorbed the full weight of the change.</p>
+
+        <h2 id="mistakes">What teams consistently get wrong</h2>
+        <p>The most common failure I see isn't technical — it's governance. Teams implement the three tiers but then
+          allow experience APIs to call system APIs directly when deadlines loom. Within 18 months, the architecture
+          degrades into a hybrid that loses the benefits of both approaches.</p>
+
+        <blockquote>
+          <p>API governance isn't bureaucracy. It's the thing that keeps your investment paying off over a multi-year
+            horizon.</p>
+        </blockquote>
+
+        <p>The second failure is over-engineering the system layer. System APIs should be thin, stable wrappers — not
+          business logic containers. When I see transformation logic embedded in system APIs, I know I'm looking at a
+          team that's going to pay a maintenance tax for years.</p>
+
+        <h2 id="verdict">The verdict</h2>
+        <p>API-led connectivity isn't perfect for every context — smaller organisations with limited system landscapes
+          may find it overkill. But for enterprises operating across multiple clouds, legacy systems, and Salesforce
+          ecosystems simultaneously, the model remains remarkably durable. The key is treating it as an architecture
+          philosophy, not just a MuleSoft feature set.</p>
+
+        <hr />
+
+        <div class="article-tags">
+          <span class="article-tag">API Strategy</span>
+          <span class="article-tag">MuleSoft</span>
+          <span class="article-tag">Architecture</span>
+          <span class="article-tag">Enterprise Integration</span>
+        </div>
+
+        <!-- ── GISCUS COMMENTS ───────────────────────────────────────
+           Setup steps (one-time, ~5 minutes):
+           1. Go to https://giscus.app
+           2. Enter your repo: pallavkumarsharma/portfolio
+           3. Enable Discussions on your repo (Settings → Features → Discussions)
+           4. Choose mapping: "pathname"  |  Category: "General" (or create "Blog Comments")
+           5. Copy the <script> tag giscus generates and replace the placeholder below
+           ─────────────────────────────────────────────────────── -->
+        <div class="comments-section">
+          <div class="comments-title">Discussion</div>
+          <!-- REPLACE THIS with your generated giscus <script> tag -->
+          <script src="https://giscus.app/client.js" data-repo="pallavkumarsharma/portfolio" data-repo-id="R_kgDOLk1ocw"
+            data-category="Blog Comments" data-category-id="DIC_kwDOLk1oc84C4UK0" data-mapping="pathname"
+            data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top"
+            data-theme="light" data-lang="en" crossorigin="anonymous" async>
+            </script>
+          <!-- END GISCUS -->
+        </div>
+
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">In this article</div>
+          <ul class="sidebar-toc">
+            <li><a href="#problem">The problem with alternatives</a></li>
+            <li><a href="#three-tier">The three-tier model</a></li>
+            <li><a href="#mistakes">What teams get wrong</a></li>
+            <li><a href="#verdict">The verdict</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">Written by</div>
+          <div class="sidebar-author">
+            <img src="../assets/images/pallav-casual.jpg" alt="Pallav Kumar Sharma" class="sidebar-author-img" />
+            <div>
+              <div class="sidebar-author-name">Pallav Kumar Sharma</div>
+              <div class="sidebar-author-role">MuleSoft Architect</div>
+            </div>
+          </div>
+          <a href="../contact.html" class="btn-outline-dark" style="font-size:0.75rem; padding: 0.55rem 1.2rem;">Get in
+            Touch</a>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>
