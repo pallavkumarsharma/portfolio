@@ -157,17 +157,18 @@
    (#s=...), which browsers never send to any server. A stranger who finds
    this page gets an empty shell and a form. */
 const YEAR_HINT = new Date().getFullYear();
-const HABITS = [
-  { key:"bed",    match:["bed"],           label:"In bed by 1am" },
-  { key:"brush",  match:["brush"],         label:"Brush" },
-  { key:"water",  match:["water"],         label:"Water 2L+" },
-  { key:"walk",   match:["walk"],          label:"Walk 30m+" },
-  { key:"swim",   match:["swim"],          label:"Swim" },
-  { key:"scoop",  match:["scoop","whey"],  label:"Whey scoop" },
-  { key:"cream",  match:["cream","heel"],  label:"Heel cream" },
-  { key:"shower", match:["shower","shwr"], label:"Shower" },
-  { key:"keto",   match:["keto"],          label:"Ketoconazole" },
+/* Habits are DISCOVERED from the sheet: every checkbox column becomes one,
+   labelled by its own header. Rename a column and this follows; add one and
+   it appears. The list below is only the shape used by ?demo. */
+let HABITS = [
+  { key:"h1", label:"In bed by 1am" }, { key:"h2", label:"Brush AM" },
+  { key:"h3", label:"Brush PM" },      { key:"h4", label:"Morning light" },
+  { key:"h5", label:"Water 2L+" },     { key:"h6", label:"Walk 30m+" },
+  { key:"h7", label:"Swim" },          { key:"h8", label:"Whey scoop" },
+  { key:"h9", label:"Heel cream" },    { key:"h10", label:"Shower" },
+  { key:"h11", label:"Keto" },
 ];
+const swimKey = () => (HABITS.find(h=>/swim/i.test(h.label))||{}).key;
 const MONTHS = {jan:0,feb:1,mar:2,apr:3,may:4,jun:5,jul:6,aug:7,sep:8,oct:9,nov:10,dec:11};
 let DAYS=[], range="all", tableOn=false, SHEET=null;
 const demo = /(^|[?&])demo(=|&|$)/.test(location.search);
@@ -200,31 +201,73 @@ function visibleDays(){ const past=DAYS.filter(d=>d.date<=today());
 const SVGNS="http://www.w3.org/2000/svg";
 const mk=(t,attrs)=>{const n=document.createElementNS(SVGNS,t); for(const k in attrs)n.setAttribute(k,attrs[k]); return n;};
 
-/* ---------- parse ---------- */
+/* ---------- parse ----------
+   Google returns a real date column as {"v":"Date(2026,7,15)","f":"Sat 15 Aug"},
+   but a text column as a plain string. Handle both, plus the formatted fallback. */
+function cellDate(c){
+  if(!c) return null;
+  const v=c.v;
+  if(v instanceof Date) return new Date(v.getFullYear(),v.getMonth(),v.getDate());
+  if(typeof v==="string"){
+    const dm=v.match(/^Date\((\d+),(\d+),(\d+)/);
+    if(dm) return new Date(+dm[1],+dm[2],+dm[3]);
+  }
+  const t=(c.f!=null?String(c.f):String(v==null?"":v)).trim();
+  const m=t.match(/(\d{1,2})\s+([A-Za-z]{3})/);
+  if(m){ const mo=MONTHS[m[2].toLowerCase()]; if(mo!=null) return new Date(YEAR_HINT,mo,+m[1]); }
+  return null;
+}
+/* Sleep may arrive as a number, "7.5", "7.5h", or "7:30" depending on how the
+   column got typed. Accept all four. */
+function cellNum(c){
+  if(!c||c.v==null) return null;
+  if(typeof c.v==="number") return c.v;
+  const s=String(c.v).trim();
+  const hm=s.match(/^(\d{1,2}):(\d{2})$/);
+  if(hm) return +hm[1]+(+hm[2])/60;
+  const n=parseFloat(s.replace(/[^0-9.]/g,""));
+  return isFinite(n)?n:null;
+}
 function parseGviz(res){
-  const cols=res.table.cols.map(c=>(c.label||"").toLowerCase());
+  const cols=res.table.cols;
   const map={}; let dateCol=-1, sleepCol=-1;
-  cols.forEach((lbl,i)=>{
+  const found=[];
+  cols.forEach((col,i)=>{
+    const lbl=String(col.label||"").trim(), low=lbl.toLowerCase();
     if(!lbl) return;
-    if(lbl.includes("date")) dateCol=i;
-    else if(lbl.includes("sleep")) sleepCol=i;
-    else HABITS.forEach(h=>{ if(h.match.some(m=>lbl.includes(m))) map[h.key]=i; });
+    if(dateCol<0 && (col.type==="date"||col.type==="datetime"||low.includes("date"))){ dateCol=i; return; }
+    if(sleepCol<0 && low.includes("sleep")){ sleepCol=i; return; }
+    if(col.type==="boolean"){                       // every checkbox column is a habit
+      const key="h"+i; found.push({key,label:lbl}); map[key]=i;
+    }
   });
-  const days=[];
+  /* a column only gets typed "boolean" once it holds a checkbox; if the sheet is
+     brand new, fall back to sniffing the first rows for true/false values */
+  if(!found.length && res.table.rows.length){
+    cols.forEach((col,i)=>{
+      if(i===dateCol||i===sleepCol||!col.label) return;
+      const hit=res.table.rows.some(r=>r&&r.c&&r.c[i]&&typeof r.c[i].v==="boolean");
+      if(hit){ const key="h"+i; found.push({key,label:String(col.label).trim()}); map[key]=i; }
+    });
+  }
+  if(found.length) HABITS=found;
+  if(dateCol<0) dateCol=0;
+  const days=[]; let seenRows=0;
   for(const r of res.table.rows){
     if(!r||!r.c) continue;
-    const dc=r.c[dateCol]; if(!dc||dc.v==null) continue;
-    const s=String(dc.v).trim();
-    const m=s.match(/(\d{1,2})\s+([A-Za-z]{3})/); if(!m) continue;
-    const mo=MONTHS[m[2].toLowerCase()]; if(mo==null) continue;
-    const d=new Date(YEAR_HINT,mo,+m[1]);
+    seenRows++;
+    const d=cellDate(r.c[dateCol]);
+    if(!d||isNaN(d)) continue;
     const cells={};
     HABITS.forEach(h=>{ const c=map[h.key]!=null?r.c[map[h.key]]:null;
       cells[h.key]=(c&&typeof c.v==="boolean")?c.v:null; });
-    const sc=sleepCol>=0?r.c[sleepCol]:null;
-    days.push({date:d,label:s,cells,sleep:(sc&&typeof sc.v==="number")?sc.v:null});
+    const label=(r.c[dateCol]&&r.c[dateCol].f)
+      ? String(r.c[dateCol].f)
+      : d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+    days.push({date:d,label,cells,sleep:cellNum(sleepCol>=0?r.c[sleepCol]:null)});
   }
   days.sort((a,b)=>a.date-b.date);
+  days.__seenRows=seenRows;
   return days;
 }
 function makeDemo(){
@@ -236,9 +279,9 @@ function makeDemo(){
     const odd=d.getDate()%2===1, keto=d.getDate()%4===1, past=i<20, cells={};
     HABITS.forEach(h=>{
       let exp=true;
-      if(h.key==="shower") exp=odd;
-      if(h.key==="keto") exp=keto;
-      cells[h.key]=exp?(past?rnd()>(h.key==="swim"?0.55:0.25):false):null;
+      if(/shower/i.test(h.label)) exp=odd;
+      if(/keto/i.test(h.label)) exp=keto;
+      cells[h.key]=exp?(past?rnd()>(/swim/i.test(h.label)?0.55:0.25):false):null;
     });
     out.push({date:d,label:d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"}),
       cells, sleep:past?Math.round((6.2+rnd()*2.6)*10)/10:null});
@@ -289,13 +332,16 @@ function render(){
   txt(el("div","val",t3),sl.length?(sl.reduce((a,b)=>a+b,0)/sl.length).toFixed(1)+"h":"—");
   txt(el("div","sub2",t3),sl.length?`${sl.length} nights · target 8h`:"log hours in the Sheet");
 
-  const swims=past.filter(d=>d.cells.swim===true).length;
-  const t4=el("div","tile",kp);
-  txt(el("div","lbl",t4),"Swim sessions");
-  txt(el("div","val",t4),String(swims));
-  const s4=el("div","sub2",t4);
-  if(swims>=8) txt(el("span","delta-good",s4),"80% whey unlocked ✓");
-  else txt(s4,`${8-swims} more unlocks the whey upgrade`);
+  const sk=swimKey();
+  const swims=sk?past.filter(d=>d.cells[sk]===true).length:0;
+  if(sk){
+    const t4=el("div","tile",kp);
+    txt(el("div","lbl",t4),"Swim sessions");
+    txt(el("div","val",t4),String(swims));
+    const s4=el("div","sub2",t4);
+    if(swims>=8) txt(el("span","delta-good",s4),"80% whey unlocked ✓");
+    else txt(s4,`${8-swims} more unlocks the whey upgrade`);
+  }
 
   /* heatmap */
   const hm=el("section","card half",main);
@@ -411,14 +457,21 @@ function render(){
 function drawWeekly(box){
   box.innerHTML="";
   const W=Math.max(300,box.clientWidth||460), H=190, padL=40, padB=26, padT=14;
-  const weeks=[]; let cur=null,last=null;
+  const all=[]; let cur=null,last=null;
   DAYS.forEach(d=>{
     const mon=new Date(d.date); mon.setDate(d.date.getDate()-((d.date.getDay()+6)%7));
     const k=mon.toISOString();
-    if(k!==last){ last=k; cur={mon,exp:0,done:0}; weeks.push(cur); }
+    if(k!==last){ last=k; cur={mon,exp:0,done:0,n:all.length+1}; all.push(cur); }
     if(d.date<=today()){ const s=dayStats(d); cur.exp+=s.exp; cur.done+=s.done; }
   });
+  /* only weeks that have actually started, and at most the last 12 —
+     a 6-month ledger would otherwise stack 27 labels on top of each other */
+  const started=all.filter(w=>w.mon<=today());
+  const weeks=(started.length?started:all.slice(0,1)).slice(-12);
+  if(weeks.length>=12) txt(box.parentNode.querySelector(".hint"),
+    "Ticks done ÷ expected, Mon–Sun. Last 12 weeks.");
   const plotH=H-padB-padT, slot=(W-padL-14)/weeks.length, bw=Math.min(24,slot-8);
+  const labelEvery=weeks.length>9?2:1;
   const svg=mk("svg",{viewBox:`0 0 ${W} ${H}`}); svg.style.width="100%";
   [0,50,100].forEach(v=>{
     const y=padT+plotH*(1-v/100);
@@ -433,10 +486,14 @@ function drawWeekly(box){
       fill:"var(--accent)"}));
     if(p>0){ const vt=mk("text",{x:x+bw/2,y:y-4,"text-anchor":"middle",fill:"var(--ink-2)"});
       vt.textContent=Math.round(p*100); svg.appendChild(vt); }
-    const xt=mk("text",{x:x+bw/2,y:H-8,"text-anchor":"middle"}); xt.textContent="W"+(i+1); svg.appendChild(xt);
+    if(i%labelEvery===0){
+      const xt=mk("text",{x:x+bw/2,y:H-8,"text-anchor":"middle"});
+      xt.textContent=w.mon.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
+      svg.appendChild(xt);
+    }
     const hit=mk("rect",{x:x-4,y:padT,width:bw+8,height:plotH,fill:"transparent"});
     const build=b=>{
-      txt(el("div","tt-title",b),"Week "+(i+1)+" · "+w.mon.toLocaleDateString("en-GB",{day:"numeric",month:"short"}));
+      txt(el("div","tt-title",b),"Week "+w.n+" · "+w.mon.toLocaleDateString("en-GB",{day:"numeric",month:"short"}));
       const r1=el("div","row",b); txt(el("span",null,r1),"Completion"); txt(el("b",null,r1),w.exp?Math.round(w.done/w.exp*100)+"%":"—");
       const r2=el("div","row",b); txt(el("span",null,r2),"Ticks"); txt(el("b",null,r2),`${w.done} / ${w.exp}`);
     };
@@ -533,7 +590,9 @@ function fail(msg){
 window.__gviz=res=>{
   try{
     DAYS=parseGviz(res);
-    if(!DAYS.length) return fail("Loaded, but no dated rows were found in the first sheet.");
+    if(!DAYS.length) return fail(DAYS.__seenRows
+      ? `Read ${DAYS.__seenRows} rows, but couldn't read a date out of the first column.`
+      : "Loaded, but the first sheet has no rows.");
     render();
   }catch(e){ fail("Parse error: "+e.message); }
   document.getElementById("cards").classList.remove("loading-dim");
