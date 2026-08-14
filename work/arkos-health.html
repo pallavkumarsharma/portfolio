@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arkos Health Clinical Integration — Pallav Kumar Sharma</title>
+  <meta name="description"
+    content="Real-time clinical integration platform connecting Salesforce Health Cloud with enterprise EHR systems via HL7 event ingestion on MuleSoft CloudHub." />
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="page-content">
+
+    <div class="article-hero">
+      <a href="index.html" class="article-back">
+        <svg viewBox="0 0 16 16" width="14" height="14">
+          <path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10 3L5 8l5 5" fill="none" />
+        </svg>
+        All Work
+      </a>
+      <div class="article-meta">
+        <span class="article-cat">Healthcare Integration</span>
+        <span class="article-dot">·</span>
+        <span class="article-date">MTX Group · Nov 2023 – Dec 2024</span>
+      </div>
+      <h1>Real-Time Clinical Integration for Arkos Health</h1>
+      <p class="article-summary">Architecting an end-to-end HL7 event ingestion platform on MuleSoft CloudHub —
+        connecting Salesforce Health Cloud with enterprise EHR systems while maintaining full HIPAA compliance across
+        all PHI data flows.</p>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-content">
+
+        <h2 id="challenge">The challenge</h2>
+        <p>Arkos Health needed to bridge a significant gap between their Salesforce Health Cloud environment and an
+          upstream EHR system generating HL7 v2 event streams. Clinical alerts — the kind of real-time notifications
+          that affect patient care decisions — were being processed manually, with delays. The integration needed to be
+          reliable, fast, and HIPAA-compliant from day one.</p>
+        <p>The added complexity: HL7 v2 messages from the EHR were inconsistently encoded, with no schema enforcement at
+          the source. Every message had to be treated as potentially malformed at the ingestion layer.</p>
+
+        <h2 id="architecture">Architecture</h2>
+        <p>I architected a three-tier API-led integration on MuleSoft CloudHub:</p>
+        <ul>
+          <li><strong>System API</strong> — HL7 v2 ingestion, validation, and normalisation. Untrusted input in; clean,
+            validated FHIR-aligned objects out. This layer absorbed all the messiness of the upstream source.</li>
+          <li><strong>Process API</strong> — clinical alert routing logic, patient case matching, and workflow
+            orchestration. This layer understood the business rules; the system layer didn't need to.</li>
+          <li><strong>Experience API</strong> — Salesforce Health Cloud integration, exposing the data contract that
+            Salesforce consumed. Built to match Salesforce's data model, not the EHR's.</li>
+        </ul>
+        <p>All PHI traversing the integration was encrypted in transit (TLS 1.2+), with payload masking policies applied
+          at the gateway layer for logging. Audit events were written to a structured log store on every API call
+          involving PHI.</p>
+
+        <h2 id="outcomes">Outcomes</h2>
+        <p>Clinical alert processing moved from a manual, delayed workflow to a real-time automated pipeline. Patient
+          case management records in Salesforce Health Cloud are now populated automatically when clinical events occur
+          upstream.</p>
+
+        <blockquote>
+          <p>The most important quality metric wasn't throughput — it was zero PHI leakage events. The security
+            architecture held under load testing and in production.</p>
+        </blockquote>
+
+        <h2 id="hipaa">HIPAA compliance approach</h2>
+        <p>HIPAA compliance wasn't a feature we added at the end — it was built into the architecture from the design
+          phase. Key decisions: access control at the API gateway (OAuth 2.0 scopes scoped to specific PHI resource
+          types), audit logging at every integration layer, and a data minimisation policy that stripped PHI from any
+          payload that didn't require it downstream.</p>
+
+        <div class="article-tags">
+          <span class="article-tag">HL7 v2</span>
+          <span class="article-tag">FHIR</span>
+          <span class="article-tag">Salesforce Health Cloud</span>
+          <span class="article-tag">MuleSoft CloudHub</span>
+          <span class="article-tag">HIPAA</span>
+          <span class="article-tag">API-Led Connectivity</span>
+        </div>
+
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">In this case study</div>
+          <ul class="sidebar-toc">
+            <li><a href="#challenge">The challenge</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#outcomes">Outcomes</a></li>
+            <li><a href="#hipaa">HIPAA compliance</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">Engagement</div>
+          <div style="font-size:0.85rem; color:var(--muted); line-height:1.7; font-weight:300;">
+            <div style="color:var(--navy); font-weight:500; margin-bottom:0.3rem;">MTX Group</div>
+            Consultant, Integration Practice<br />Nov 2023 – Dec 2024
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">Working in healthcare?</div>
+          <a href="../contact.html" class="btn-outline-dark"
+            style="font-size:0.75rem; padding: 0.55rem 1.2rem; display:inline-block;">Let's Talk</a>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

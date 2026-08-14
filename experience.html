@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Experience — Pallav Kumar Sharma</title>
+<link rel="icon" href="assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<style>
+  .exp-hero {
+    background: var(--navy);
+    padding: 120px 8vw 80px;
+  }
+  .exp-hero .section-title { color: var(--white); }
+  .exp-hero .section-subtitle { color: rgba(248,249,252,0.5); }
+
+  .exp-body { padding: 80px 8vw; }
+
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+  .timeline-item {
+    padding: 0 0 4rem 3.5rem;
+    position: relative;
+  }
+  .timeline-dot {
+    position: absolute; left: -5px; top: 10px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+  .timeline-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+  .timeline-period {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .timeline-period-badge {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    font-size: 0.68rem;
+    color: var(--navy-mid);
+  }
+  .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .timeline-bullets li {
+    font-size: 0.97rem;
+    color: var(--text);
+    font-weight: 300;
+    padding-left: 1.4rem;
+    position: relative;
+    line-height: 1.75;
+  }
+  .timeline-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+    top: 0.05em;
+  }
+  .timeline-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  .timeline-tag {
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-content">
+
+  <div class="exp-hero">
+    <div class="section-label">Experience</div>
+    <h1 class="section-title">Where I've built.</h1>
+    <div class="divider"></div>
+    <p class="section-subtitle">Five years across consulting, healthcare, government, and media — leading integrations that connect enterprise systems at scale.</p>
+  </div>
+
+  <div class="exp-body">
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-company">MinloPro Partners</div>
+        <div class="timeline-role">Associate Manager, Consulting Services & Integration Strategy</div>
+        <div class="timeline-period">
+          Dec 2024 — Present
+          <span class="timeline-period-badge">Current</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Lead enterprise MuleSoft architecture and integration strategy across healthcare, fintech, and SaaS engagements, including Robotic Process Automation (RPA) delivery.</li>
+          <li>Delivered 50+ enterprise integration solutions connecting Salesforce Clouds, ERP platforms, and enterprise systems via API-led connectivity architectures.</li>
+          <li>Manage and mentor a cross-functional team of 6 integration engineers, setting development standards, providing architecture guidance, and overseeing multiple concurrent projects.</li>
+          <li>Designed and implemented CI/CD pipelines using GitHub Actions, Azure DevOps, and Jenkins — significantly reducing deployment cycle times across client projects.</li>
+          <li>Established enterprise integration governance frameworks, reusable asset libraries, and security standards adopted across all client engagements.</li>
+          <li>Implement secure integration solutions ensuring data protection, API security standards, and scalable event-driven architectures.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="timeline-tag">MuleSoft Anypoint</span>
+          <span class="timeline-tag">API-Led Architecture</span>
+          <span class="timeline-tag">Salesforce Clouds</span>
+          <span class="timeline-tag">CI/CD</span>
+          <span class="timeline-tag">Azure DevOps</span>
+          <span class="timeline-tag">RPA</span>
+          <span class="timeline-tag">Team Leadership</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-company">MTX Group</div>
+        <div class="timeline-role">Consultant, Integration Practice</div>
+        <div class="timeline-period">Nov 2023 — Dec 2024</div>
+        <ul class="timeline-bullets">
+          <li>Designed and implemented MuleSoft integration solutions connecting Salesforce Health Cloud with enterprise healthcare systems for multiple clients.</li>
+          <li>Led the technical workstream for the Arkos Health integration platform — architecting HL7 event ingestion pipelines and real-time integration workflows using MuleSoft CloudHub.</li>
+          <li>Built scalable integrations enabling clinical alert processing, patient case management workflows, and healthcare data synchronisation.</li>
+          <li>Ensured HIPAA-compliant PHI data handling across all healthcare integration layers, implementing encryption, access control, and audit logging.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Salesforce Health Cloud</span>
+          <span class="timeline-tag">HL7</span>
+          <span class="timeline-tag">CloudHub</span>
+          <span class="timeline-tag">HIPAA</span>
+          <span class="timeline-tag">Healthcare Integration</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-company">Invenio</div>
+        <div class="timeline-role">Associate Consultant, Enterprise & Integration Practice</div>
+        <div class="timeline-period">Jul 2021 — Nov 2023</div>
+        <ul class="timeline-bullets">
+          <li>Contributed to integration architecture improvements for global media client Informa, reducing operational costs by approximately 15% through redesigned middleware patterns.</li>
+          <li>Delivered MuleSoft integration solutions for the UAE Federal Tax Authority (eCTS) project — integrating banking systems and government platforms using a unified common data model.</li>
+          <li>Designed RAML-based APIs and MuleSoft integrations deployed on Private Cloud Edition (PCE), supporting sensitive government workloads.</li>
+          <li>Developed integration workflows enabling secure, auditable communication between multiple financial institutions and national taxation systems.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span class="timeline-tag">RAML APIs</span>
+          <span class="timeline-tag">Private Cloud Edition</span>
+          <span class="timeline-tag">Banking Integration</span>
+          <span class="timeline-tag">Government</span>
+          <span class="timeline-tag">Data Modelling</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<div id="footer-placeholder"></div>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

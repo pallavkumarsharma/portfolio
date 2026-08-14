@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HIPAA-Compliant Integration: Secure by Design — Pallav Kumar Sharma</title>
+  <meta name="description"
+    content="What 'secure by design' actually means when building HIPAA-compliant healthcare integrations with MuleSoft." />
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="page-content">
+
+    <div class="article-hero">
+      <a href="index.html" class="article-back">
+        <svg viewBox="0 0 16 16" width="14" height="14">
+          <path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M10 3L5 8l5 5" fill="none" />
+        </svg>
+        All Articles
+      </a>
+      <div class="article-meta">
+        <span class="article-cat">Healthcare Integration</span>
+        <span class="article-dot">·</span>
+        <span class="article-date">October 2024 · 6 min read</span>
+      </div>
+      <h1>HIPAA-Compliant Integration: What "Secure by Design" Actually Means</h1>
+      <p class="article-summary">Healthcare integrations carry a weight that fintech and retail simply don't. A single
+        misconfigured API policy can expose PHI to the wrong system. Here's how I think about security architecture in
+        health data environments.</p>
+    </div>
+
+    <div class="article-layout">
+      <article class="article-content">
+
+        <p>Healthcare integrations occupy a different risk category from any other domain I work in. When a financial
+          integration fails, a transaction is delayed. When a healthcare integration fails — or worse, leaks — patient
+          safety and privacy are at stake. After leading HIPAA-compliant integration architectures for enterprise
+          healthcare clients, I want to share how I think about security in this context.</p>
+
+        <h2 id="architecture">Security as architecture, not afterthought</h2>
+        <p>The most dangerous phrase in healthcare integration is "we'll add security in the next sprint." By the time
+          security is bolted onto an existing integration, the structural decisions that make it hard to secure have
+          already been made. PHI handling needs to be a first-class architectural concern — not a compliance checkbox
+          applied after the fact.</p>
+        <p>I've seen teams spend six months retrofitting encryption, access control, and audit logging onto integrations
+          that were never designed with them in mind. It cost more than building them right the first time, and it still
+          left architectural gaps that a greenfield design wouldn't have had.</p>
+
+        <h2 id="gateway">Policy enforcement at the API gateway layer</h2>
+        <p>In practice, I implement a combination of OAuth 2.0 scopes, IP allowlisting, and payload masking policies at
+          the MuleSoft API gateway level. This means that even if a consuming application has a bug or a compromised
+          token, the gateway acts as a hard enforcement boundary.</p>
+
+        <blockquote>
+          <p>The system API never trusts input from the experience or process layers without validation. Every layer is
+            a potential point of failure.</p>
+        </blockquote>
+
+        <p>Mutual TLS between internal services adds another enforcement layer for particularly sensitive PHI flows.
+          It's additional overhead, but for EHR data — particularly data touching clinical decisions — it's the right
+          call.</p>
+
+        <h2 id="audit">Audit logging as a design requirement</h2>
+        <p>HIPAA requires comprehensive audit trails — who accessed what PHI, when, and from which system. I treat audit
+          logging as a first-class integration concern, not an operational add-on. Every API call involving PHI writes
+          structured audit events to a tamper-evident log store.</p>
+        <p>The key word is <strong>structured</strong>. Unstructured log strings are nearly impossible to query at audit
+          time. Every log entry should be a JSON object with consistent fields: actor, action, resource ID, timestamp,
+          source system, and outcome.</p>
+
+        <h2 id="hl7">HL7 and the complexity it brings</h2>
+        <p>HL7 v2 was designed in an era when security was rarely a concern. Messages are verbose, encoding is
+          inconsistent, and validation is often weak. When I build HL7 ingestion pipelines, I treat every incoming
+          message as untrusted input — normalise and validate at ingestion, and only then allow it to interact with
+          downstream Salesforce Health Cloud workflows.</p>
+        <p>This validation layer has caught malformed messages, encoding mismatches, and — on one occasion — a genuine
+          data integrity issue upstream before it propagated into clinical workflows. The gateway isn't overhead. It's
+          what keeps bad data from becoming bad outcomes.</p>
+
+        <hr />
+
+        <div class="article-tags">
+          <span class="article-tag">Healthcare</span>
+          <span class="article-tag">HIPAA</span>
+          <span class="article-tag">Security</span>
+          <span class="article-tag">HL7</span>
+          <span class="article-tag">MuleSoft</span>
+        </div>
+
+        <div class="comments-section">
+          <div class="comments-title">Discussion</div>
+          <script src="https://giscus.app/client.js" data-repo="pallavkumarsharma/portfolio" data-repo-id="R_kgDOLk1ocw"
+            data-category="Blog Comments" data-category-id="DIC_kwDOLk1oc84C4UK0" data-mapping="pathname"
+            data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top"
+            data-theme="light" data-lang="en" crossorigin="anonymous" async>
+            </script>
+        </div>
+
+      </article>
+
+      <aside class="article-sidebar">
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">In this article</div>
+          <ul class="sidebar-toc">
+            <li><a href="#architecture">Security as architecture</a></li>
+            <li><a href="#gateway">API gateway enforcement</a></li>
+            <li><a href="#audit">Audit logging</a></li>
+            <li><a href="#hl7">HL7 complexity</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <div class="sidebar-block-title">Written by</div>
+          <div class="sidebar-author">
+            <img src="../assets/images/pallav-casual.jpg" alt="Pallav Kumar Sharma" class="sidebar-author-img" />
+            <div>
+              <div class="sidebar-author-name">Pallav Kumar Sharma</div>
+              <div class="sidebar-author-role">MuleSoft Architect</div>
+            </div>
+          </div>
+          <a href="../contact.html" class="btn-outline-dark" style="font-size:0.75rem; padding: 0.55rem 1.2rem;">Get in
+            Touch</a>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

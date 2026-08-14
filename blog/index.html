@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Pallav Kumar Sharma</title>
+  <meta name="description"
+    content="Articles on API strategy, enterprise integration patterns, and building engineering teams that scale." />
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <style>
+    .blog-hero {
+      background: var(--navy);
+      padding: 120px 8vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 85% 30%, rgba(196, 154, 60, 0.07) 0%, transparent 55%);
+    }
+
+    .blog-hero .section-title {
+      color: var(--white);
+    }
+
+    .blog-hero .section-subtitle {
+      color: rgba(248, 249, 252, 0.5);
+    }
+
+    .blog-body {
+      padding: 80px 8vw;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .blog-card {
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .blog-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+      text-decoration: none;
+      display: block;
+      transition: color 0.2s;
+    }
+
+    .blog-title:hover {
+      color: var(--gold);
+    }
+
+    .blog-excerpt {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+
+    .blog-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .blog-tag {
+      font-size: 0.68rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--muted);
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+
+    .blog-read-more {
+      font-size: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+
+    .blog-read-more:hover {
+      border-color: var(--gold);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="nav-placeholder"></div>
+  <div class="page-content">
+
+    <div class="blog-hero">
+      <div class="section-label">Blog</div>
+      <h1 class="section-title">Thoughts on integration,<br>architecture & craft.</h1>
+      <div class="divider"></div>
+      <p class="section-subtitle">Perspectives on API strategy, enterprise integration patterns, and building
+        engineering teams that scale.</p>
+    </div>
+
+    <div class="blog-body">
+      <div class="blog-grid">
+
+        <div class="blog-card reveal">
+          <div class="blog-date">July 2025 · 5 min read</div>
+          <a href="developer-to-architect-mindset-shift.html" class="blog-title">From Developer to Architect: The
+            Mindset Shift Nobody Tells You About</a>
+          <p class="blog-excerpt">Moving into architecture isn't about knowing more technology. It's about learning to
+            hold ambiguity, make defensible trade-offs, and communicate decisions to people who care about very
+            different things.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">Career</span>
+            <span class="blog-tag">Leadership</span>
+            <span class="blog-tag">Architecture</span>
+          </div>
+          <a href="developer-to-architect-mindset-shift.html" class="blog-read-more">Read Article →</a>
+        </div>
+
+        <div class="blog-card reveal">
+          <div class="blog-date">March 2025 · 7 min read</div>
+          <a href="why-api-led-connectivity-gold-standard.html" class="blog-title">Why API-Led Connectivity Is Still the
+            Gold Standard for Enterprise Integration</a>
+          <p class="blog-excerpt">Five years after MuleSoft popularised the three-tier model, I still see API-led
+            connectivity outperform every alternative I've encountered in the wild. Here's why — and what teams get
+            wrong about it.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">API Strategy</span>
+            <span class="blog-tag">MuleSoft</span>
+            <span class="blog-tag">Architecture</span>
+          </div>
+          <a href="why-api-led-connectivity-gold-standard.html" class="blog-read-more">Read Article →</a>
+        </div>
+
+        <div class="blog-card reveal">
+          <div class="blog-date">October 2024 · 6 min read</div>
+          <a href="hipaa-compliant-integration-secure-by-design.html" class="blog-title">HIPAA-Compliant Integration:
+            What "Secure by Design" Actually Means</a>
+          <p class="blog-excerpt">Healthcare integrations carry a weight that fintech and retail simply don't. A single
+            misconfigured API policy can expose PHI to the wrong system. Here's how I think about security architecture
+            in health data environments.</p>
+          <div class="blog-tags">
+            <span class="blog-tag">Healthcare</span>
+            <span class="blog-tag">HIPAA</span>
+            <span class="blog-tag">Security</span>
+          </div>
+          <a href="hipaa-compliant-integration-secure-by-design.html" class="blog-read-more">Read Article →</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

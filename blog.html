@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blog — Pallav Kumar Sharma</title>
+<link rel="icon" href="assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<style>
+  .blog-hero {
+    background: var(--navy);
+    padding: 120px 8vw 80px;
+  }
+  .blog-hero .section-title { color: var(--white); }
+  .blog-hero .section-subtitle { color: rgba(248,249,252,0.5); }
+
+  .blog-body { padding: 80px 8vw; }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2.5rem;
+  }
+  .blog-card {
+    cursor: pointer;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .blog-card:hover { transform: translateY(-3px); }
+  .blog-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .blog-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+    transition: color 0.2s;
+  }
+  .blog-card:hover .blog-title { color: var(--gold); }
+  .blog-excerpt {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+  .blog-read-more {
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+    display: inline-block;
+  }
+  .blog-card:hover .blog-read-more { border-color: var(--gold); }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(7,14,30,0.88);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--white);
+    border-radius: 2px;
+    max-width: 700px; width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 3.5rem;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 1.5rem; right: 1.5rem;
+    background: none; border: 1px solid var(--border);
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; cursor: pointer; color: var(--muted);
+    border-radius: 2px;
+    transition: border-color 0.2s;
+  }
+  .modal-close:hover { border-color: var(--navy); color: var(--navy); }
+  .modal-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--gold);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+  .modal-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-body p {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.9;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+  .modal-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--navy);
+    margin: 2rem 0 0.8rem;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-content">
+
+  <div class="blog-hero">
+    <div class="section-label">Blog</div>
+    <h1 class="section-title">Thoughts on integration,<br>architecture & craft.</h1>
+    <div class="divider"></div>
+    <p class="section-subtitle">Perspectives on API strategy, enterprise integration patterns, and building engineering teams that scale.</p>
+  </div>
+
+  <div class="blog-body">
+    <div class="blog-grid">
+
+      <div class="blog-card reveal" onclick="openModal('post1')">
+        <div class="blog-date">July 2025 · 5 min read</div>
+        <div class="blog-title">From Developer to Architect: The Mindset Shift Nobody Tells You About</div>
+        <div class="blog-excerpt">Moving into architecture isn't about knowing more technology. It's about learning to hold ambiguity, make defensible trade-offs, and communicate decisions to people who care about very different things.</div>
+        <span class="blog-read-more">Read Article →</span>
+      </div>
+
+      <div class="blog-card reveal" onclick="openModal('post2')">
+        <div class="blog-date">March 2025 · 7 min read</div>
+        <div class="blog-title">Why API-Led Connectivity Is Still the Gold Standard for Enterprise Integration</div>
+        <div class="blog-excerpt">Five years after MuleSoft popularised the three-tier model, I still see API-led connectivity outperform every alternative I've encountered in the wild. Here's why — and what teams get wrong about it.</div>
+        <span class="blog-read-more">Read Article →</span>
+      </div>
+
+      <div class="blog-card reveal" onclick="openModal('post3')">
+        <div class="blog-date">October 2024 · 6 min read</div>
+        <div class="blog-title">HIPAA-Compliant Integration: What "Secure by Design" Actually Means</div>
+        <div class="blog-excerpt">Healthcare integrations carry a weight that fintech and retail simply don't. A single misconfigured API policy can expose PHI to the wrong system. Here's how I think about security architecture in health data environments.</div>
+        <span class="blog-read-more">Read Article →</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<div id="footer-placeholder"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModalDirect()">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="assets/js/nav.js"></script>
+<script>
+window.blogPosts = {
+  post1: {
+    label: 'Career & Leadership',
+    date: 'July 2025 · 5 min read',
+    title: 'From Developer to Architect: The Mindset Shift Nobody Tells You About',
+    body: `
+      <p>When I moved from integration developer to integration architect, I expected the challenge to be technical — more complex systems, higher-stakes design decisions, deeper expertise. What I didn't expect was how much the hardest parts would have nothing to do with technology at all.</p>
+      <h3>The thing that actually changes</h3>
+      <p>As a developer, correctness is the primary virtue. Code either works or it doesn't. Architecture operates in a world of trade-offs, where every decision is correct in some dimension and wrong in another. You're not choosing the right answer — you're choosing which problems you're willing to have.</p>
+      <h3>Communicating across different worldviews</h3>
+      <p>Developers care about correctness, elegance, and maintainability. Product owners care about delivery timelines and feature capability. CIOs care about cost, risk, and strategic alignment. Architects need to translate the same decision into each of these languages — sometimes in the same meeting.</p>
+      <h3>Learning to hold ambiguity</h3>
+      <p>Projects start ambiguous and become clear only as they progress — but architecture decisions often need to be made early, precisely when you know the least. The skill I've worked hardest to develop is what I'd call "confident tentativeness": making a clear, committed decision in the present while building in the flexibility to revisit it as information improves.</p>
+      <p>If you're a developer considering the move to architecture, my advice is this: start noticing the decisions that feel uncomfortable because there's no clear right answer. That discomfort is the skill you need to build. The technology is the easy part.</p>
+    `
+  },
+  post2: {
+    label: 'Integration Strategy',
+    date: 'March 2025 · 7 min read',
+    title: 'Why API-Led Connectivity Is Still the Gold Standard for Enterprise Integration',
+    body: `
+      <p>Every few years, a new integration paradigm arrives claiming to replace everything before it. Event-driven architectures, mesh-based approaches, composable enterprise platforms — all promising simplicity, all ultimately revealing their own complexity in production. Yet the three-tier API-led connectivity model, popularised by MuleSoft nearly a decade ago, continues to outperform alternatives I encounter in the wild. Here's my honest view on why.</p>
+      <h3>The problem with "simpler" alternatives</h3>
+      <p>Point-to-point integrations are seductive at small scale. Two systems need to talk — you build one connection, it works, you ship. The trouble is that at enterprise scale, point-to-point creates a mesh so dense it becomes unmaintainable. I've inherited systems where changing one endpoint required tracing dependencies through 40 integrations. API-led connectivity forces a discipline that pays dividends precisely when the system is under its highest stress: during change.</p>
+      <h3>The three-tier model in practice</h3>
+      <p>Experience Layer, Process Layer, System Layer — this separation of concerns maps almost perfectly to how organisations actually change. System APIs are stable and rarely modified. Process APIs evolve with business logic. Experience APIs change constantly as products evolve. When teams conflate these layers, they pay in brittleness. When they respect the separation, they gain the ability to swap out underlying systems without touching consumer-facing integrations.</p>
+      <h3>What teams consistently get wrong</h3>
+      <p>The most common failure I see isn't technical — it's governance. Teams implement the three tiers but then allow experience APIs to call system APIs directly when deadlines loom. Within 18 months, the architecture degrades into a hybrid that loses the benefits of both approaches. API governance isn't bureaucracy; it's the thing that keeps your investment paying off over a multi-year horizon.</p>
+      <p>The second failure is over-engineering the system layer. System APIs should be thin, stable wrappers — not business logic containers. When I see transformation logic embedded in system APIs, I know I'm looking at a team that's going to pay a maintenance tax for years.</p>
+      <h3>The verdict</h3>
+      <p>API-led connectivity isn't perfect for every context — smaller organisations with limited system landscapes may find it overkill. But for enterprises operating across multiple clouds, legacy systems, and Salesforce ecosystems simultaneously, the model remains remarkably durable. The key is treating it as an architecture philosophy, not just a MuleSoft feature set.</p>
+    `
+  },
+  post3: {
+    label: 'Healthcare Integration',
+    date: 'October 2024 · 6 min read',
+    title: 'HIPAA-Compliant Integration: What "Secure by Design" Actually Means',
+    body: `
+      <p>Healthcare integrations occupy a different risk category from any other domain I work in. When a financial integration fails, a transaction is delayed. When a healthcare integration fails — or worse, leaks — patient safety and privacy are at stake. After leading HIPAA-compliant integration architectures for enterprise healthcare clients, I want to share how I think about security in this context.</p>
+      <h3>Security as architecture, not afterthought</h3>
+      <p>The most dangerous phrase in healthcare integration is "we'll add security in the next sprint." By the time security is bolted onto an existing integration, the structural decisions that make it hard to secure have already been made. PHI handling needs to be a first-class architectural concern — not a compliance checkbox applied after the fact.</p>
+      <h3>Policy enforcement at the API gateway layer</h3>
+      <p>In practice, I implement a combination of OAuth 2.0 scopes, IP allowlisting, and payload masking policies at the MuleSoft API gateway level. This means that even if a consuming application has a bug or a compromised token, the gateway acts as a hard enforcement boundary. The system API never trusts input from the experience or process layers without validation.</p>
+      <h3>Audit logging as a design requirement</h3>
+      <p>HIPAA requires comprehensive audit trails — who accessed what PHI, when, and from which system. I treat audit logging as a first-class integration concern, not an operational add-on. Every API call involving PHI writes structured audit events to a tamper-evident log store.</p>
+      <h3>HL7 and the complexity it brings</h3>
+      <p>HL7 v2 was designed in an era when security was rarely a concern. Messages are verbose, encoding is inconsistent, and validation is often weak. When I build HL7 ingestion pipelines, I treat every incoming message as untrusted input, normalize and validate at ingestion, and only then allow it to interact with downstream Salesforce Health Cloud workflows.</p>
+    `
+  }
+};
+</script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

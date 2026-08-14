@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — Pallav Kumar Sharma</title>
+<meta name="description" content="About Pallav Kumar Sharma — MuleSoft Architect with 5+ years in enterprise integration across Healthcare, Banking, and Finance."/>
+<link rel="icon" href="assets/images/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/styles.css"/>
+<style>
+  .about-hero {
+    background: var(--navy);
+    padding: 120px 8vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-hero::after {
+    content: '';
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(circle at 80% 50%, rgba(196,154,60,0.06) 0%, transparent 55%);
+  }
+  .about-hero .section-title { color: var(--white); }
+  .about-hero .section-subtitle { color: rgba(248,249,252,0.5); }
+  .about-hero .section-label { color: var(--gold); }
+
+  .about-main {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 6rem;
+    align-items: start;
+    padding: 80px 8vw;
+  }
+  .about-photo-col { position: sticky; top: calc(var(--nav-h) + 2rem); }
+  .about-photo-wrap {
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .about-photo-wrap img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 2px;
+  }
+  .about-photo-caption {
+    margin-top: 1.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .about-photo-caption span {
+    display: block;
+    color: var(--gold);
+    font-size: 0.72rem;
+    margin-bottom: 0.2rem;
+  }
+  .about-casual-wrap {
+    margin-top: 1.5rem;
+    position: relative;
+  }
+  .about-casual-wrap img {
+    width: 100%;
+    border-radius: 2px;
+    object-fit: cover;
+    object-position: top;
+    filter: sepia(5%);
+    border: 1px solid var(--border);
+  }
+
+  .about-text-col p {
+    font-size: 1.05rem;
+    color: var(--text);
+    line-height: 1.9;
+    margin-bottom: 1.6rem;
+    font-weight: 300;
+  }
+  .about-text-col p:first-child { font-size: 1.15rem; }
+  .about-text-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin: 2.5rem 0 1rem;
+  }
+  .about-chips {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .chip {
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    color: var(--navy-mid);
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+  }
+  .about-education {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+  }
+  .about-education-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .about-education-school {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .about-education-degree {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 1000px) {
+    .about-main { grid-template-columns: 1fr; gap: 3rem; }
+    .about-photo-col { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .about-photo-caption { display: none; }
+    .about-casual-wrap { margin-top: 0; }
+  }
+  @media (max-width: 600px) {
+    .about-photo-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-content">
+
+  <div class="about-hero">
+    <div class="section-label">About</div>
+    <h1 class="section-title">Integration is my craft.<br><em style="font-style:italic">Architecture</em> is my canvas.</h1>
+    <div class="divider"></div>
+    <p class="section-subtitle">Five years building the connective tissue of enterprise digital transformation — across healthcare systems, financial platforms, and global SaaS ecosystems.</p>
+  </div>
+
+  <div class="about-main">
+    <div class="about-photo-col reveal">
+      <div class="about-photo-wrap">
+        <img src="assets/images/pallav-mono.png" alt="Pallav Kumar Sharma"/>
+      </div>
+      <div class="about-photo-caption">
+        <span>Pallav Kumar Sharma</span>
+        MuleSoft Architect · Integration Manager
+      </div>
+      <div class="about-casual-wrap">
+        <img src="assets/images/pallav-casual.jpg" alt="Pallav Kumar Sharma"/>
+      </div>
+    </div>
+
+    <div class="about-text-col">
+      <p class="reveal">I'm Pallav Kumar Sharma — a MuleSoft Certified Architect and Integration Manager with over five years of experience designing and delivering enterprise-scale API and middleware solutions for global organisations.</p>
+      <p class="reveal">My work sits at the intersection of technical depth and strategic vision. I specialise in the MuleSoft Anypoint Platform, API-led connectivity, and Salesforce ecosystem integrations — helping enterprises build the connective tissue that makes digital transformation real, not just aspirational.</p>
+      <p class="reveal">I've had the privilege of leading integrations in some of the world's most demanding environments: HIPAA-compliant healthcare systems, UAE government tax platforms, global financial institutions, and SaaS-first enterprises. Each project has deepened my conviction that good integration architecture is ultimately about people — the engineers who maintain it, the users who depend on it, and the organisations whose operations run on it.</p>
+      <p class="reveal">Beyond architecture, I care deeply about engineering culture. Mentoring teams, establishing governance standards, and building practices that outlast any single project — these are the things I'm most proud of.</p>
+
+      <h3 class="reveal">What I bring to every engagement</h3>
+      <p class="reveal">A rare combination of hands-on technical delivery and architectural leadership. I can design the system, write the integration, review the pull request, and present the strategy to the C-suite — sometimes in the same week.</p>
+
+      <div class="about-chips reveal">
+        <span class="chip">MuleSoft Anypoint</span>
+        <span class="chip">API-Led Connectivity</span>
+        <span class="chip">Salesforce Ecosystem</span>
+        <span class="chip">Healthcare / HIPAA</span>
+        <span class="chip">HL7 / FHIR</span>
+        <span class="chip">CI/CD Pipelines</span>
+        <span class="chip">Event-Driven Architecture</span>
+        <span class="chip">Azure DevOps</span>
+        <span class="chip">Apache Kafka</span>
+        <span class="chip">REST · SOAP · EDI</span>
+        <span class="chip">Integration Governance</span>
+        <span class="chip">Team Leadership</span>
+      </div>
+
+      <div class="about-education reveal">
+        <div class="about-education-label">Education</div>
+        <div class="about-education-school">NIT Jaipur</div>
+        <div class="about-education-degree">Architecture</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div id="footer-placeholder"></div>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
